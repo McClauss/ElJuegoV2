@@ -17,15 +17,20 @@ public class Movimiento : MonoBehaviour
     public AudioSource audioS;// Se usara para poner play a un sonido
     public AudioClip clipSonido;// Al sonido que se le dara play
 
+    
+    public Rigidbody rb;//Para uso de fisica capturando el rigidbody
+
     void Start()
     {
         posInicial=transform.position;
+        rb=GetComponent<Rigidbody>();//para uso de fisicas
+        
     }
 
     
     void Update()
     {
-        MovimientoJugador();
+        MovimientoPlayer();
         ChequearDistancia();
         /*Evalua si el jugador cayo del escenario*/
         if(transform.position.y <-10){
@@ -60,6 +65,16 @@ public class Movimiento : MonoBehaviour
             StartAudioClip(clipSonido);
         }
         
+    }
+
+    /*Movimiento con Fisica*/
+    void MovimientoPlayer(){
+        float hor= Input.GetAxis("Horizontal");//Lee Eje Horizontal
+        float ver= Input.GetAxis("Vertical");//Lee Eje Vertical
+
+        Vector3 inputJugador=new Vector3(hor,0,ver);
+
+        rb.AddForce(inputJugador*speed*Time.deltaTime);//Agrega fuerza con el rigidbody asignado
     }
 
     /*Funcion para Calcular Distancia Contra un Objeto*/
