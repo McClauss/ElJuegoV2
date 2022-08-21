@@ -30,7 +30,7 @@ public class Movimiento : MonoBehaviour
     
     void Update()
     {
-        MovimientoPlayer();
+        MovimientoJugador();
         ChequearDistancia();
         /*Evalua si el jugador cayo del escenario*/
         if(transform.position.y <-10){
